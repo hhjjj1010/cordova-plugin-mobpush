@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-mobpush" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>MobPush</name>
+    <js-module name="MobPushPlugin" src="www/MobPushPlugin.js">
+        <clobbers target="window.MobPush"/>
+    </js-module>
+
+    <preference name="APP_KEY"/>
+    <preference name="APP_SECRET"/>
+
+    <platform name="android">
+        <hook src="scripts/android_app_name.js" type="after_prepare"/>
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="MobPushPlugin">
+                <param name="android-package" value="cn.hhjjj.mobpush.MobPushPlugin"/>
+            </feature>
+        </config-file>
+        <config-file parent="/*" target="AndroidManifest.xml"/>
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <meta-data android:name="com.mob.mobpush.debugLevel" android:value="4" />
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application/activity">
+            <intent-filter>    
+                <action android:name="${applicationId}.default.MAIN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </config-file>
+
+        <source-file src="src/android/MobPushPlugin.java" target-dir="src/cn/hhjjj/mobpush"/>
+        <source-file src="src/android/MobPushApplication.java" target-dir="src/cn/hhjjj/mobpush"/>
+
+        <framework src="src/android/mobpush.gradle" custom="true" type="gradleReference"/>
+
+    </platform>
+    <platform name="ios">
+        <config-file parent="/*" target="config.xml">
+            <feature name="MobPushPlugin">
+                <param name="ios-package" value="MobPushPlugin"/>
+            </feature>
+        </config-file>
+        <config-file target="*-Info.plist" parent="UIBackgroundModes">
+            <array>
+                <string>remote-notification</string>
+            </array>
+        </config-file>
+        <config-file target="*-Debug.plist" parent="aps-environment">
+            <string>development</string>
+        </config-file>
+        <config-file target="*-Release.plist" parent="aps-environment">
+            <string>production</string>
+        </config-file>
+
+        <config-file target="*-Info.plist" parent="MOBAppkey">
+            <string>$APP_KEY</string>
+        </config-file>
+
+        <config-file target="*-Info.plist" parent="MOBAppSecret">
+            <string>$APP_SECRET</string>
+        </config-file>
+
+        <framework src="libc++.tbd" weak="true"/>
+        <framework src="libz.1.2.5.tbd" weak="true"/>
+
+        <framework src="src/ios/SDK/MobPush/MobPush.framework" custom="true"/>
+        <framework src="src/ios/SDK/MobPush/MobPushServiceExtension.framework" custom="true"/>
+        <framework src="src/ios/SDK/Required/MOBFoundation.framework" custom="true"/>
+        <framework src="src/ios/SDK/Required/MOBFoundationEx.framework" custom="true"/>
+
+        <header-file src="src/ios/Plugins/MobPushPlugin.h"/>
+        <source-file src="src/ios/Plugins/MobPushPlugin.m"/>
+
+        <header-file src="src/ios/Plugins/AppDelegate+MobPush.h"/>
+        <source-file src="src/ios/Plugins/AppDelegate+MobPush.m"/>
+    </platform>
+</plugin>
