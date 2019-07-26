@@ -59,7 +59,7 @@ MobPush {
             appKey "小米的appkey"
         }
         //FCM推送通道配置
-        FCM{
+        FCM {
             //设置默认推送通知显示图标
             iconRes "@mipmap/ic_launcher"
         }
@@ -119,9 +119,9 @@ buildscript {
 - [获取点击通知内容](#获取点击通知内容)
   - [event-mobpush.openedNotificationMessage](#event-mobpush.openedNotificationMessage)
 - [获取通知内容](#获取通知内容)
-  - [event-mobpush.openedNotificationMessage](#event-mobpush.openedNotificationMessage)
+  - [event-mobpush.receivedNotificationMessage](#event-mobpush.receivedNotificationMessage)
 - [获取自定义消息内容](#获取自定义消息内容)
-   - [event-mobpush.openedNotificationMessage](#event-mobpush.openedNotificationMessage)
+   - [event-mobpush.receivedLocalMessage](#event-mobpush.receivedLocalMessage)
 - [绑定手机号码](#绑定手机号码)
   - [bindPhoneNumber](#bindPhoneNumber)
 - [添加本地通知](#添加本地通知)
@@ -274,7 +274,7 @@ document.addEventListener("mobpush.openedNotificationMessage", function (event) 
 ```
 
 ### 获取通知内容
-#### event-mobpush. mobpush.receivedNotificationMessage
+#### event-mobpush.receivedNotificationMessage
 收到通知时触发。
 
 代码示例：
