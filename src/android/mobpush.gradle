@@ -2,8 +2,9 @@ apply plugin: 'com.mob.sdk'
 
 // 在MobSDK的扩展中注册MobPush的相关信息
 MobSDK {
-appKey "替换为mob官方申请的appkey"
-appSecret "替换为mob官方申请的appkey对应的appSecret"
+    appKey "替换为mob官方申请的appkey"
+    appSecret "替换为mob官方申请的appkey对应的appSecret"
+}
 
 MobPush {
 
