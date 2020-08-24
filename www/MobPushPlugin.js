@@ -4,6 +4,10 @@ exports.initPush = function (success, error) {
     exec(success, error, 'MobPushPlugin', 'initPush');
 };
 
+exports.getRegistrationId = function (success, error) {
+    exec(success, error, 'MobPushPlugin', 'getRegistrationId');
+};
+
 exports.addLocalNotification = function (arg0, success, error) {
     exec(success, error, 'MobPushPlugin', 'addLocalNotification', [arg0]);
 };
