@@ -105,6 +105,7 @@ buildscript {
 ## API
 - [初始化、停止与恢复推送服务](#初始化、停止与恢复推送服务)
   - [initPush](#initPush)
+  - [getRegistrationId](#getRegistrationId)
   - [isPushStopped](#isPushStopped)
   - [stopPush](#stopPush)
   - [restartPush](#restartPush)
@@ -139,6 +140,15 @@ buildscript {
 代码示例：
 ``` js
 window.MobPush.initPush();
+```
+#### getRegistrationId
+代码示例：
+``` js
+window.MobPush.getRegistrationId(function success(id) {
+  console.log(id);
+}, function error(err) {
+  console.log(err);
+});
 ```
 #### isPushStopped
 检查推送服务是否停止。
