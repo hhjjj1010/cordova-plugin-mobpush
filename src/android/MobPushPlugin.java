@@ -1,5 +1,9 @@
 package cn.hhjjj.mobpush;
 
+import android.content.Context;
+import android.content.Intent;
+import android.provider.Settings;
+
 import com.mob.pushsdk.MobPush;
 import com.mob.pushsdk.MobPushCallback;
 import com.mob.pushsdk.MobPushCustomMessage;
@@ -124,6 +128,21 @@ public class MobPushPlugin extends CordovaPlugin {
 
         if (action.equals("bindPhoneNumber")) {
             bindPhoneNumber(args, callbackContext);
+            return true;
+        }
+        
+        if (action.equals("openNotificationSettings")) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run () {
+                    Context context = cordova.getActivity().getApplicationContext();
+                    Intent intent = new Intent();
+                    intent.setAction(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
+                    intent.putExtra("android.provider.extra.APP_PACKAGE", context.getApplicationContext().getPackageName());
+                    cordova.getActivity().startActivity(intent);
+                }
+            });
+
             return true;
         }
 
