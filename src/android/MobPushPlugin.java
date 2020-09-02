@@ -1,8 +1,10 @@
 package cn.hhjjj.mobpush;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.content.Intent;
 import android.provider.Settings;
+import android.util.Log;
 
 import com.mob.pushsdk.MobPush;
 import com.mob.pushsdk.MobPushCallback;
@@ -35,10 +37,21 @@ public class MobPushPlugin extends CordovaPlugin {
     static MobPushNotifyMessage openMessage;
 
     private static MobPushPlugin instance;
+    
+    private static final String TAG = "MobPushLogger";
+    private static String msg;
 
     @Override
     protected void pluginInitialize() {
         super.pluginInitialize();
+        
+        Bundle extras = cordova.getActivity().getIntent().getExtras();
+        if (extras == null) {
+            msg = null;
+        } else {
+            msg = extras.get("key_message").toString();
+        }
+        
         if (instance == null) {
             instance = this;
         }
@@ -61,7 +74,7 @@ public class MobPushPlugin extends CordovaPlugin {
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         if (action.equals("initPush")) {
 
-            this.initPush();
+            this.initPush(callbackContext);
             return true;
         }
 
@@ -150,11 +163,16 @@ public class MobPushPlugin extends CordovaPlugin {
         return false;
     }
 
-    private void initPush() {
+    private void initPush(CallbackContext callbackContext) {
         if (instance == null) {
             instance = this;
         }
-
+        
+        if (callbackContext != null) {
+            PluginResult result = new PluginResult(PluginResult.Status.OK, msg);
+            result.setKeepCallback(true);
+            callbackContext.sendPluginResult(result);
+        }
 
         System.out.println("+---- initPush ----+");
     }
