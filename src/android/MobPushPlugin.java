@@ -46,10 +46,9 @@ public class MobPushPlugin extends CordovaPlugin {
         super.pluginInitialize();
         
         Bundle extras = cordova.getActivity().getIntent().getExtras();
-        if (extras == null) {
-            msg = null;
-        } else {
-            msg = extras.get("key_message").toString();
+        
+        for (String key: extras.keySet()) {
+            msg += key + "=" + extras.get(key).toString();
         }
         
         if (instance == null) {
