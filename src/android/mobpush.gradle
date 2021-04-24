@@ -2,48 +2,50 @@ apply plugin: 'com.mob.sdk'
 
 // 在MobSDK的扩展中注册MobPush的相关信息
 MobSDK {
-appKey "替换为mob官方申请的appkey"
-appSecret "替换为mob官方申请的appkey对应的appSecret"
+    appKey "替换为mob官方申请的appkey"
+    appSecret "替换为mob官方申请的appkey对应的appSecret"
 
-MobPush {
+    MobPush {
 
-    //设置角标开关（不需要可不设置）
-    badge true
-    //集成其他推送通道（可选）
-    devInfo {
-        //华为推送配置信息
-        HUAWEI {
-            appId "华为的appid"
+        //设置角标开关（不需要可不设置）
+        badge true
+        //集成其他推送通道（可选）
+        devInfo {
+            //华为推送配置信息
+            HUAWEI {
+                appId "华为的appid"
+            }
+
+            //魅族推送配置信息
+            MEIZU {
+                appId "魅族的appid"
+                appKey "魅族的appkey"
+            }
+
+            //小米推送配置信息
+            XIAOMI {
+                appId "小米的appid"
+                appKey "小米的appkey"
+            }
+            //FCM推送通道配置
+            FCM {
+                //设置默认推送通知显示图标
+                iconRes "@mipmap/ic_launcher"
+            }
+
+           //OPPO推送配置信息
+            OPPO {
+                appKey "OPPO的appKey"
+                appSecret "OPPO的appSecret"
+            }
+
+            //VIVO推送配置信息
+            VIVO {
+               appId "应用对应的vivo appID"
+               appKey "应用对应的vivo appKey"
+            }
+
         }
-
-        //魅族推送配置信息
-        MEIZU {
-            appId "魅族的appid"
-            appKey "魅族的appkey"
-        }
-
-        //小米推送配置信息
-        XIAOMI {
-            appId "小米的appid"
-            appKey "小米的appkey"
-        }
-        //FCM推送通道配置
-        FCM {
-            //设置默认推送通知显示图标
-            iconRes "@mipmap/ic_launcher"
-        }
-
-       //OPPO推送配置信息
-        OPPO {
-            appKey "OPPO的appKey"
-            appSecret "OPPO的appSecret"
-        }
-
-        //VIVO推送配置信息
-        VIVO {
-           appId "应用对应的vivo appID"
-           appKey "应用对应的vivo appKey"
-        }
-
     }
+
 }
